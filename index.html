@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>自己紹介ジェネレーター</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    textarea { width: 100%; height: 140px; margin: 10px 0; }
+    button { padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>紹介文ジェネレーター</h1>
+  <label>アカウント名（@付きで）：</label><br>
+  <input type="text" id="username" placeholder="@makoto39"><br><br>
+  <button onclick="generateIntro()">紹介文を作る</button>
+  <textarea id="output" readonly></textarea><br>
+  <button onclick="shareOnX()">Xでシェア</button>
+
+  <script>
+    const roles = ["階段紹介", "人間観察者", "夜型エンジニア", "猫の下僕"];
+    const genders = ["男", "女", "非公開", "無所属"];
+    const status = ["独身", "既婚", "離婚歴あり", "猫と同居中"];
+    const dreams = ["AIエンジニアを目指す", "ゆるく生きる", "週1でアプリ公開中", "将来は本を書く予定"];
+
+    function generateIntro() {
+      const username = document.getElementById("username").value || "@yourname";
+      const intro = [
+        username,
+        randomItem(roles),
+        randomItem(genders),
+        randomItem(status),
+        randomItem(dreams)
+      ].join("\n");
+
+      document.getElementById("output").value = intro;
+    }
+
+    function randomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function shareOnX() {
+      const text = document.getElementById("output").value;
+      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text + "\n#自己紹介")}`;
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>
