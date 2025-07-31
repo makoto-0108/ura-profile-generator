@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
-<title>チャッピーの裏自己紹介診断</title>
+<title>チャッピーの裏自己紹介診断 完全版</title>
 <style>
   body {
     font-family: sans-serif;
@@ -20,6 +20,7 @@
     padding: 8px;
     margin-top: 5px;
     font-size: 1rem;
+    box-sizing: border-box;
   }
   button {
     margin-top: 20px;
@@ -30,6 +31,16 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
+  }
+  #shareBtn {
+    margin-top: 10px;
+    padding: 10px;
+    background: #1da1f2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
   }
   pre {
     margin-top: 20px;
@@ -43,7 +54,7 @@
 </head>
 <body>
 
-<h1>チャッピーの裏自己紹介診断</h1>
+<h1>チャッピーの裏自己紹介診断 完全版</h1>
 
 <form id="quizForm">
   <label for="mood">Q1. 今のあなたの気分に近いのは？</label>
@@ -52,4 +63,80 @@
     <option value="静かに燃えてる">静かに燃えてる</option>
     <option value="ちょっと疲れてるけど元気">ちょっと疲れてるけど元気</option>
     <option value="めちゃくちゃ前向きモード">めちゃくちゃ前向きモード</option>
-    <option value="あえて何
+    <option value="あえて何も考えずゆるく生きてる">あえて何も考えずゆるく生きてる</option>
+  </select>
+
+  <label for="character">Q2. 自分に一番近いキャラタイプは？</label>
+  <select id="character" required>
+    <option value="" disabled selected>選んでください</option>
+    <option value="聞き上手で観察派">聞き上手で観察派</option>
+    <option value="ノリと直感の人">ノリと直感の人</option>
+    <option value="掘り下げ沼タイプ">掘り下げ沼タイプ</option>
+    <option value="真面目な変人">真面目な変人</option>
+  </select>
+
+  <label for="hobby">Q3. 最近よくやってること・ハマってることは？（1行で）</label>
+  <input type="text" id="hobby" placeholder="例：アプリ自己開発" required />
+
+  <label for="secret">Q4. みんなには言ってないけど、実は…？（1行で）</label>
+  <input type="text" id="secret" placeholder="例：夜中にこっそり漫画読み漁ってる" required />
+
+  <label for="habit">Q5. ついやってしまうクセや変わった習慣は？（1行で）</label>
+  <input type="text" id="habit" placeholder="例：食べ物はまず匂いをかぐクセがある" required />
+
+  <button type="submit">診断する</button>
+</form>
+
+  <!-- 診断ボタンの後にシェアボタン -->
+  <button id="shareBtn" type="button">Xでシェアする</button>
+
+  <pre id="result"></pre>
+
+<script>
+  const form = document.getElementById('quizForm');
+  const resultBox = document.getElementById('result');
+  const shareBtn = document.getElementById('shareBtn');
+  const username = '@makoto39';
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const mood = document.getElementById('mood').value;
+    const character = document.getElementById('character').value;
+    const hobby = document.getElementById('hobby').value.trim();
+    const secret = document.getElementById('secret').value.trim();
+    const habit = document.getElementById('habit').value.trim();
+
+    const lines = [
+      `${username}`,
+      `裏自己紹介`,
+      `・${character}で、${mood.toLowerCase()}気味`,
+      `・最近は${hobby}にハマってる`,
+      `・みんなには言ってないけど、${secret}`,
+      `・クセは${habit}`,
+      `#裏自己紹介診断`
+    ];
+
+    let output = lines.join('\n');
+    if (output.length > 140) {
+      output = output.slice(0, 137) + '...';
+    }
+
+    resultBox.textContent = output;
+  });
+
+  shareBtn.addEventListener('click', () => {
+    const text = resultBox.textContent;
+    if (!text) {
+      alert('まずは「診断する」を押して結果を生成してください。');
+      return;
+    }
+    const urlEncodedText = encodeURIComponent(text);
+    const shareUrl = `https://twitter.com/intent/tweet?text=${urlEncodedText}`;
+    window.open(shareUrl, '_blank');
+  });
+</script>
+
+</body>
+</html>
+
