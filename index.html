@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
-<title>チャッピーの裏自己紹介</title>
+<title>チャッピーのじつはプロフィール</title>
 <style>
   body {
     font-family: sans-serif;
@@ -15,7 +15,7 @@
     margin-top: 15px;
     font-weight: bold;
   }
-  select, input[type="text"] {
+  input[type="text"] {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
@@ -49,70 +49,58 @@
     white-space: pre-wrap;
     border-radius: 6px;
     font-size: 1rem;
+    min-height: 140px;
   }
 </style>
 </head>
 <body>
 
-<h1>チャッピーの裏自己紹介</h1>
+<h1>チャッピーのじつはプロフィール</h1>
 
 <form id="quizForm">
-  <label for="mood">Q1. 今のあなたの気分に近いのは？</label>
-  <select id="mood" required>
-    <option value="" disabled selected>選んでください</option>
-    <option value="静かに燃えてる">静かに燃えてる</option>
-    <option value="ちょっと疲れてるけど元気">ちょっと疲れてるけど元気</option>
-    <option value="めちゃくちゃ前向きモード">めちゃくちゃ前向きモード</option>
-    <option value="あえて何も考えずゆるく生きてる">あえて何も考えずゆるく生きてる</option>
-  </select>
+  <label for="q1">Q1. やめたいけど、ついやっちゃうことは？（一言で）</label>
+  <input type="text" id="q1" placeholder="例：元恋人のSNSをチェックしてしまう" required />
 
-  <label for="character">Q2. 自分に一番近いキャラタイプは？</label>
-  <select id="character" required>
-    <option value="" disabled selected>選んでください</option>
-    <option value="聞き上手で観察派">聞き上手で観察派</option>
-    <option value="ノリと直感の人">ノリと直感の人</option>
-    <option value="掘り下げ沼タイプ">掘り下げ沼タイプ</option>
-    <option value="真面目な変人">真面目な変人</option>
-  </select>
+  <label for="q2">Q2. 他人から見たら“え？”って思われそうなマイルールは？（一言で）</label>
+  <input type="text" id="q2" placeholder="例：左足からしか靴下を履かない" required />
 
-  <label for="hobby">Q3. 最近よくやってること・ハマってることは？（1行で）</label>
-  <input type="text" id="hobby" placeholder="例：アプリ自己開発" required />
+  <label for="q3">Q3. 思い返すと今でもちょっと恥ずかしい黒歴史は？（一言で）</label>
+  <input type="text" id="q3" placeholder="例：厨二病っぽいHNを使っていた" required />
 
-  <label for="secret">Q4. みんなには言ってないけど、実は…？（1行で）</label>
-  <input type="text" id="secret" placeholder="例：夜中にこっそり漫画読み漁ってる" required />
+  <label for="q4">Q4. こっそり誇ってる、自分の変な才能は？（一言で）</label>
+  <input type="text" id="q4" placeholder="例：一度行った店の位置をGoogleマップ無しで覚えてる" required />
 
-  <label for="habit">Q5. ついやってしまうクセや変わった習慣は？（1行で）</label>
-  <input type="text" id="habit" placeholder="例：食べ物はまず匂いをかぐクセがある" required />
+  <label for="q5">Q5. なぜか未だに苦手なもの・ことは？（一言で）</label>
+  <input type="text" id="q5" placeholder="例：電話" required />
 
   <button type="submit">診断する</button>
 </form>
 
-  <!-- 診断ボタンの後にシェアボタン -->
-  <button id="shareBtn" type="button">Xでシェアする</button>
+<button id="shareBtn" type="button">Xでシェアする</button>
 
-  <pre id="result"></pre>
+<pre id="result"></pre>
 
 <script>
   const form = document.getElementById('quizForm');
   const resultBox = document.getElementById('result');
   const shareBtn = document.getElementById('shareBtn');
-  const username = '@makoto39';
 
   form.addEventListener('submit', e => {
     e.preventDefault();
 
-    const mood = document.getElementById('mood').value;
-    const character = document.getElementById('character').value;
-    const hobby = document.getElementById('hobby').value.trim();
-    const secret = document.getElementById('secret').value.trim();
-    const habit = document.getElementById('habit').value.trim();
+    const q1 = document.getElementById('q1').value.trim();
+    const q2 = document.getElementById('q2').value.trim();
+    const q3 = document.getElementById('q3').value.trim();
+    const q4 = document.getElementById('q4').value.trim();
+    const q5 = document.getElementById('q5').value.trim();
 
     const lines = [
-  `・${character}で、${mood.toLowerCase()}気味`,
-  `・最近は${hobby}にハマってる`,
-  `・みんなには言ってないけど、${secret}`,
-  `・クセは${habit}`,
-  `#裏自己紹介`
+  `やめたいのにやっちゃう「${q1}」…そのガマン弱さ、人間だもんね？`,
+  `みんなが「え？」となるマイルールは「${q2}」で、実は密かなチャームポイント。`,
+  `ちょっと恥ずかしい黒歴史「${q3}」、今ではいいネタにしかならないね！`,
+  `隠れた才能「${q4}」、さすがあなただけの特技、笑いが止まらない！`,
+  `苦手な「${q5}」、でもそれを言い訳にしないあなたはなかなかのツワモノ。`,
+  `#じつはプロフィール`
 ];
 
 
@@ -138,4 +126,3 @@
 
 </body>
 </html>
-
