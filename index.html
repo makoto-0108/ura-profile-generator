@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
-<title>チャッピーの裏自己紹介診断 完全版</title>
+<title>チャッピーの裏自己紹介</title>
 <style>
   body {
     font-family: sans-serif;
@@ -54,7 +54,7 @@
 </head>
 <body>
 
-<h1>チャッピーの裏自己紹介診断 完全版</h1>
+<h1>チャッピーの裏自己紹介</h1>
 
 <form id="quizForm">
   <label for="mood">Q1. 今のあなたの気分に近いのは？</label>
@@ -108,14 +108,13 @@
     const habit = document.getElementById('habit').value.trim();
 
     const lines = [
-      `${username}`,
-      `裏自己紹介`,
-      `・${character}で、${mood.toLowerCase()}気味`,
-      `・最近は${hobby}にハマってる`,
-      `・みんなには言ってないけど、${secret}`,
-      `・クセは${habit}`,
-      `#裏自己紹介診断`
-    ];
+  `・${character}で、${mood.toLowerCase()}気味`,
+  `・最近は${hobby}にハマってる`,
+  `・みんなには言ってないけど、${secret}`,
+  `・クセは${habit}`,
+  `#裏自己紹介`
+];
+
 
     let output = lines.join('\n');
     if (output.length > 140) {
