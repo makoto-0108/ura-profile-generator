@@ -73,10 +73,26 @@
   <label for="q5">Q5. なぜか未だに苦手なもの・ことは？（一言で）</label>
   <input type="text" id="q5" placeholder="例：電話" required />
 
-  <button type="submit">診断する</button>
+  <button type="submit">こっそり告白</button>
 </form>
 
-<button id="shareBtn" type="button">Xでシェアする</button>
+<button id="shareBtn" type="button" style="
+  background: black;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+">
+  Xでシェアする
+</button>
+
+
+
+
+
 
 <pre id="result"></pre>
 
@@ -115,7 +131,7 @@
   shareBtn.addEventListener('click', () => {
     const text = resultBox.textContent;
     if (!text) {
-      alert('まずは「診断する」を押して結果を生成してください。');
+      alert('まずは「こっそり告白」を押して結果を生成してください。');
       return;
     }
     const urlEncodedText = encodeURIComponent(text);
