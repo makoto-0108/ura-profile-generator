@@ -1,328 +1,302 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8" />
-<title>チャッピーのじつはプロフィール</title>
-<style>
-  body {
-    font-family: sans-serif;
-    padding: 20px;
-    max-width: 480px;
-    margin: auto;
-  }
-  label {
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-  }
-  input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    font-size: 1rem;
-    box-sizing: border-box;
-  }
-  /* 全体のボタン共通設定は黒背景 */
-  button, #shareBtn, #twitterShareBtn {
-    margin-top: 20px;
-    padding: 12px;
-    font-size: 1.1rem;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  /* 「こっそり告白」ボタンだけ青に */
-  #quizForm button[type="submit"] {
-    background-color: #1da1f2; /* Twitterブルー */
-    width: 100%;
-  }
-  /* 共有ボタン2つは半々幅 */
-  #twitterShareBtn, #shareBtn {
-    width: 49%;
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  #twitterShareBtn {
-    margin-right: 2%;
-  }
-  #shareBtn {
-    margin-left: 0;
-  }
-  #resultTitle {
-    margin-top: 30px;
-    font-size: 1.1rem;
-    color: #2e7d32;
-    font-weight: bold;
-  }
-  pre {
-    margin-top: 10px;
-    background: #81c784;
-    padding: 15px;
-    white-space: pre-wrap;
-    border-radius: 8px;
-    font-size: 1rem;
-    min-height: 140px;
-    color: #1b1b1b;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-  }
-  /* 共有メニュー */
-  #shareMenu {
-    display: none;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background: #f9f9f9;
-    padding: 10px;
-  }
-  #shareMenu button, #shareMenu a {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 8px;
-    border: none;
-    border-radius: 6px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1rem;
-    cursor: pointer;
-    user-select: none;
-  }
-  #shareMenu button.copyBtn {
-    background: #4caf50;
-    color: white;
-  }
-  #shareMenu a.line {
-    background: #00c300;
-    color: white;
-  }
-  #shareMenu a.slack {
-    background: #4a154b;
-    color: white;
-  }
-  #shareMenu a.discord {
-    background: #5865f2;
-    color: white;
-  }
-  p.intro-text {
-    font-size: 0.9rem;  /* h1より小さめ */
-    color: #555;        /* ちょっと落ち着いたグレーで優しい感じに */
-    margin-top: 8px;    /* h1との間隔調整 */
-    line-height: 1.4;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <title>じつは...プロフィール</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 6px 20px 20px;
+      max-width: 480px;
+      margin: auto;
+    }
+    img.logo {
+      display: block;
+      max-width: 100%;
+      margin: 0 auto 0 !important;
+    }
+    p.intro-text {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0 !important;
+      padding: 0 !important;
+      line-height: 1.4;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    button, #shareBtn, #twitterShareBtn {
+      margin-top: 20px;
+      padding: 12px;
+      font-size: 1.1rem;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #quizForm button[type="submit"] {
+      background-color: #1da1f2;
+      width: 100%;
+    }
+    #twitterShareBtn, #shareBtn {
+      width: 49%;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    #twitterShareBtn {
+      margin-right: 2%;
+    }
+    #resultTitle {
+      margin-top: 30px;
+      font-size: 1.1rem;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+    pre {
+      margin-top: 10px;
+      background: #81c784;
+      padding: 15px;
+      white-space: pre-wrap;
+      border-radius: 8px;
+      font-size: 1rem;
+      min-height: 140px;
+      color: #1b1b1b;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    #shareMenu {
+      display: none;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #f9f9f9;
+      padding: 10px;
+    }
+    #shareMenu button, #shareMenu a {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 8px;
+      border: none;
+      border-radius: 6px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    #shareMenu button.copyBtn {
+      background: #4caf50;
+      color: white;
+    }
+    #shareMenu a.line {
+      background: #00c300;
+      color: white;
+    }
+    #shareMenu a.slack {
+      background: #4a154b;
+      color: white;
+    }
+    #shareMenu a.discord {
+      background: #5865f2;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-<h1>チャッピーのじつはプロフィール</h1>
-<p class="intro-text">あなたの“じつは…”を一言で入力するだけで、ちょっと毒舌なAIがプロフィールを作ってくれます。</p>
+  <img src="header.png" alt="じつは...プロフィール" class="logo" />
+  <p class="intro-text">あなたの“じつは…”を一言で入力するだけで、ちょっと毒舌なAIがプロフィールを作ってくれます。</p>
 
-<form id="quizForm">
-  <label for="q1">Q1. やめたいけど、ついやっちゃうことは？（一言で）</label>
-  <input type="text" id="q1" placeholder="例：元恋人のSNSをチェックしてしまう" required />
+  <form id="quizForm">
+    <label for="q1">Q1. やめたいけど、ついやっちゃうことは？（一言で）</label>
+    <input type="text" id="q1" placeholder="例：元恋人のSNSをチェックしてしまう" required />
 
-  <label for="q2">Q2. 他人から見たら“え？”って思われそうなマイルールは？（一言で）</label>
-  <input type="text" id="q2" placeholder="例：左足からしか靴下を履かない" required />
+    <label for="q2">Q2. 他人から見たら“え？”って思われそうなマイルールは？（一言で）</label>
+    <input type="text" id="q2" placeholder="例：左足からしか靴下を履かない" required />
 
-  <label for="q3">Q3. 思い返すと今でもちょっと恥ずかしい黒歴史は？（一言で）</label>
-  <input type="text" id="q3" placeholder="例：厨二病っぽいHNを使っていた" required />
+    <label for="q3">Q3. 思い返すと今でもちょっと恥ずかしい黒歴史は？（一言で）</label>
+    <input type="text" id="q3" placeholder="例：厨二病っぽいHNを使っていた" required />
 
-  <label for="q4">Q4. こっそり誇ってる、自分の変な才能は？（一言で）</label>
-  <input type="text" id="q4" placeholder="例：一度行った店の位置をGoogleマップ無しで覚えてる" required />
+    <label for="q4">Q4. こっそり誇ってる、自分の変な才能は？（一言で）</label>
+    <input type="text" id="q4" placeholder="例：一度行った店の位置をGoogleマップ無しで覚えてる" required />
 
-  <label for="q5">Q5. なぜか未だに苦手なもの・ことは？（一言で）</label>
-  <input type="text" id="q5" placeholder="例：電話" required />
+    <label for="q5">Q5. なぜか未だに苦手なもの・ことは？（一言で）</label>
+    <input type="text" id="q5" placeholder="例：電話" required />
 
-  <button type="submit">こっそり告白</button>
-</form>
+    <button type="submit">こっそり告白</button>
+  </form>
 
-<div style="display:flex; gap: 2%;">
-  <button id="twitterShareBtn" type="button">Xでシェアする</button>
-  <button id="shareBtn" type="button">共有メニューを開く</button>
-</div>
+  <div style="display:flex; gap: 2%;">
+    <button id="twitterShareBtn" type="button">Xでシェアする</button>
+    <button id="shareBtn" type="button">共有メニューを開く</button>
+  </div>
 
-<div id="shareMenu" aria-label="共有メニュー" role="region">
-  <a href="#" class="line" target="_blank" rel="noopener noreferrer" aria-label="LINEでシェア">LINEでシェア</a>
-  <a href="#" class="slack" target="_blank" rel="noopener noreferrer" aria-label="Slackでシェア">Slackでシェア</a>
-  <a href="#" class="discord" target="_blank" rel="noopener noreferrer" aria-label="Discordでシェア">Discordでシェア</a>
-  <button class="copyBtn" type="button" aria-label="URLをコピー">URLをコピー</button>
-</div>
+  <div id="shareMenu" aria-label="共有メニュー" role="region">
+    <a href="#" class="line" target="_blank" rel="noopener noreferrer" aria-label="LINEでシェア">LINEでシェア</a>
+    <a href="#" class="slack" target="_blank" rel="noopener noreferrer" aria-label="Slackでシェア">Slackでシェア</a>
+    <a href="#" class="discord" target="_blank" rel="noopener noreferrer" aria-label="Discordでシェア">Discordでシェア</a>
+    <button class="copyBtn" type="button" aria-label="URLをコピー">URLをコピー</button>
+  </div>
 
-<h2 id="resultTitle">✅ 結果はこちら：</h2>
-<pre id="result">ここに結果が表示されます。</pre>
+  <h2 id="resultTitle">✅ 結果はこちら：</h2>
+  <pre id="result">ここに結果が表示されます。</pre>
 
-<script>
-  // ランダム選択関数
-  function pickRandom(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
-
-  // プロフィール生成関数
-  function makeProfile(q1, q2, q3, q4, q5) {
-    const q1Patterns = [
-      `やめたいのにやっちゃう「${q1}」…そのガマン弱さ、人間だもんね？`,
-      `ついやっちゃう「${q1}」、そこがチャームポイントかもよ？`,
-      `どうしても止められない「${q1}」、まあ仕方ないさ！`,
-      `「${q1}」って言い訳に聞こえるけど、わかる気がする。`,
-      `あー、それ「${q1}」やめられないよね、超リアル。`
-    ];
-
-    const q2Patterns = [
-      `みんなが「え？」となるマイルールは「${q2}」で、実は密かなチャームポイント。`,
-      `あなたのマイルール「${q2}」、変わってるけど憎めない！`,
-      `「${q2}」って言われるけど、それもあなただからOK。`,
-      `「${q2}」のせいで得したこと、ある？ない？笑`,
-      `誰もわかってくれないけど「${q2}」は譲れない。`
-    ];
-
-    const q3Patterns = [
-      `ちょっと恥ずかしい黒歴史「${q3}」、今ではいいネタにしかならないね！`,
-      `過去の「${q3}」はあなたの武勇伝。笑って許してやろう。`,
-      `「${q3}」、誰だって通る道さ、気にすんな！`,
-      `昔の「${q3}」は今のあなたのエッセンス。感謝しよう。`,
-      `「${q3}」は秘密？それとも暴露タイム？`
-    ];
-
-    const q4Patterns = [
-      `隠れた才能「${q4}」、さすがあなただけの特技、笑いが止まらない！`,
-      `こっそり自慢の「${q4}」、誰にも負けないぞ。`,
-      `「${q4}」って実はかなりスゴイよね、秘密にしとこう。`,
-      `「${q4}」は天才の証。誰か褒めてくれ！`,
-      `そんな才能「${q4}」、もっとみんなに知ってほしい！`
-    ];
-
-    const q5Patterns = [
-      `苦手な「${q5}」、でもそれを言い訳にしないあなたはなかなかのツワモノ。`,
-      `「${q5}」が苦手？でもそんなあなたが好きだよ。`,
-      `どうしても苦手な「${q5}」、それもあなたの魅力だよね。`,
-      `「${q5}」は人生のスパイス。むしろ味わおう。`,
-      `苦手な「${q5}」を克服中？応援してるよ！`
-    ];
-
-    const lines = [
-      pickRandom(q1Patterns),
-      pickRandom(q2Patterns),
-      pickRandom(q3Patterns),
-      pickRandom(q4Patterns),
-      pickRandom(q5Patterns)
-    ];
-
-    const hashtag = ' #じつはプロフィール';
-    return lines.join('\n') + hashtag;
-  }
-
-  // ここからイベント処理
-  const form = document.getElementById('quizForm');
-  const resultBox = document.getElementById('result');
-  const shareBtn = document.getElementById('shareBtn');
-  const twitterShareBtn = document.getElementById('twitterShareBtn');
-  const shareMenu = document.getElementById('shareMenu');
-  const lineLink = shareMenu.querySelector('a.line');
-  const slackLink = shareMenu.querySelector('a.slack');
-  const discordLink = shareMenu.querySelector('a.discord');
-  const copyBtn = shareMenu.querySelector('button.copyBtn');
-
-  let fullOutput = '';
-  let shareOutput = '';
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-
-    // 入力値取得
-    const q1 = document.getElementById('q1').value.trim();
-    const q2 = document.getElementById('q2').value.trim();
-    const q3 = document.getElementById('q3').value.trim();
-    const q4 = document.getElementById('q4').value.trim();
-    const q5 = document.getElementById('q5').value.trim();
-
-    // 空欄チェック（念のため）
-    if (!q1 || !q2 || !q3 || !q4 || !q5) {
-      alert('すべての質問に答えてください！');
-      return;
+  <script>
+    function pickRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
     }
 
-    fullOutput = makeProfile(q1, q2, q3, q4, q5);
-    shareOutput = fullOutput;
+    function makeProfile(q1, q2, q3, q4, q5) {
+      const q1Patterns = [
+        `やめたいのにやっちゃう「${q1}」…そのガマン弱さ、人間だもんね？`,
+        `ついやっちゃう「${q1}」、そこがチャームポイントかもよ？`,
+        `どうしても止められない「${q1}」、まあ仕方ないさ！`,
+        `「${q1}」って言い訳に聞こえるけど、わかる気がする。`,
+        `あー、それ「${q1}」やめられないよね、超リアル。`
+      ];
+      const q2Patterns = [
+        `みんなが「え？」となるマイルールは「${q2}」で、実は密かなチャームポイント。`,
+        `あなたのマイルール「${q2}」、変わってるけど憎めない！`,
+        `「${q2}」って言われるけど、それもあなただからOK。`,
+        `「${q2}」のせいで得したこと、ある？ない？笑`,
+        `誰もわかってくれないけど「${q2}」は譲れない。`
+      ];
+      const q3Patterns = [
+        `ちょっと恥ずかしい黒歴史「${q3}」、今ではいいネタにしかならないね！`,
+        `過去の「${q3}」はあなたの武勇伝。笑って許してやろう。`,
+        `「${q3}」、誰だって通る道さ、気にすんな！`,
+        `昔の「${q3}」は今のあなたのエッセンス。感謝しよう。`,
+        `「${q3}」は秘密？それとも暴露タイム？`
+      ];
+      const q4Patterns = [
+        `隠れた才能「${q4}」、さすがあなただけの特技、笑いが止まらない！`,
+        `こっそり自慢の「${q4}」、誰にも負けないぞ。`,
+        `「${q4}」って実はかなりスゴイよね、秘密にしとこう。`,
+        `「${q4}」は天才の証。誰か褒めてくれ！`,
+        `そんな才能「${q4}」、もっとみんなに知ってほしい！`
+      ];
+      const q5Patterns = [
+        `苦手な「${q5}」、でもそれを言い訳にしないあなたはなかなかのツワモノ。`,
+        `「${q5}」が苦手？でもそんなあなたが好きだよ。`,
+        `どうしても苦手な「${q5}」、それもあなたの魅力だよね。`,
+        `「${q5}」は人生のスパイス。むしろ味わおう。`,
+        `苦手な「${q5}」を克服中？応援してるよ！`
+      ];
 
-    // 結果表示
-    resultBox.textContent = fullOutput;
+      const lines = [
+        pickRandom(q1Patterns),
+        pickRandom(q2Patterns),
+        pickRandom(q3Patterns),
+        pickRandom(q4Patterns),
+        pickRandom(q5Patterns)
+      ];
 
-    // 共有メニュー非表示にしておく
-    shareMenu.style.display = 'none';
-  });
+      const hashtag = ' #じつはプロフィール';
+      return lines.join('\n') + hashtag;
+    }
 
-  // 共有メニュー開閉
-  shareBtn.addEventListener('click', () => {
-    if (shareMenu.style.display === 'none' || shareMenu.style.display === '') {
-      shareMenu.style.display = 'block';
-    } else {
+    const form = document.getElementById('quizForm');
+    const resultBox = document.getElementById('result');
+    const shareBtn = document.getElementById('shareBtn');
+    const twitterShareBtn = document.getElementById('twitterShareBtn');
+    const shareMenu = document.getElementById('shareMenu');
+    const lineLink = shareMenu.querySelector('a.line');
+    const slackLink = shareMenu.querySelector('a.slack');
+    const discordLink = shareMenu.querySelector('a.discord');
+    const copyBtn = shareMenu.querySelector('button.copyBtn');
+
+    let fullOutput = '';
+    let shareOutput = '';
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const q1 = document.getElementById('q1').value.trim();
+      const q2 = document.getElementById('q2').value.trim();
+      const q3 = document.getElementById('q3').value.trim();
+      const q4 = document.getElementById('q4).value.trim();
+      const q5 = document.getElementById('q5').value.trim();
+
+      if (!q1 || !q2 || !q3 || !q4 || !q5) {
+        alert('すべての質問に答えてください！');
+        return;
+      }
+
+      fullOutput = makeProfile(q1, q2, q3, q4, q5);
+      shareOutput = fullOutput;
+      resultBox.textContent = fullOutput;
       shareMenu.style.display = 'none';
-    }
-  });
-
-  // X（旧Twitter）シェア
-  twitterShareBtn.addEventListener('click', () => {
-    if (!shareOutput) {
-      alert('まずは「こっそり告白」を押して結果を作成してください！');
-      return;
-    }
-    const text = encodeURIComponent(shareOutput);
-    const url = `https://twitter.com/intent/tweet?text=${text}`;
-    window.open(url, '_blank');
-  });
-
-  // LINEシェア
-  lineLink.addEventListener('click', e => {
-    if (!shareOutput) {
-      e.preventDefault();
-      alert('まずは「こっそり告白」を押して結果を作成してください！');
-      return;
-    }
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent(shareOutput);
-    e.currentTarget.href = `https://line.me/R/msg/text/?${text}%0D%0A${url}`;
-  });
-
-  // Slackシェア
-  slackLink.addEventListener('click', e => {
-    if (!shareOutput) {
-      e.preventDefault();
-      alert('まずは「こっそり告白」を押して結果を作成してください！');
-      return;
-    }
-    // Slack共有はURLのみが多いので、簡単に
-    const url = encodeURIComponent(window.location.href);
-    e.currentTarget.href = `https://slack.com/share?text=${encodeURIComponent(shareOutput)}&url=${url}`;
-  });
-
-  // Discordシェア（URLのみ）
-  discordLink.addEventListener('click', e => {
-    if (!shareOutput) {
-      e.preventDefault();
-      alert('まずは「こっそり告白」を押して結果を作成してください！');
-      return;
-    }
-    const url = encodeURIComponent(window.location.href);
-    e.currentTarget.href = `https://discord.com/channels/@me`;
-    // Discord公式の共有URLは存在しないため、ここは誘導だけにしています。
-  });
-
-  // コピー処理
-  copyBtn.addEventListener('click', () => {
-    if (!shareOutput) {
-      alert('まずは「こっそり告白」を押して結果を作成してください！');
-      return;
-    }
-    navigator.clipboard.writeText(shareOutput).then(() => {
-      alert('結果をコピーしました！');
-    }, () => {
-      alert('コピーに失敗しました。手動でコピーしてください。');
     });
-  });
-</script>
+
+    shareBtn.addEventListener('click', () => {
+      shareMenu.style.display = (shareMenu.style.display === 'none' || shareMenu.style.display === '') ? 'block' : 'none';
+    });
+
+    twitterShareBtn.addEventListener('click', () => {
+      if (!shareOutput) {
+        alert('まずは「こっそり告白」を押して結果を作成してください！');
+        return;
+      }
+      const text = encodeURIComponent(shareOutput);
+      const url = `https://twitter.com/intent/tweet?text=${text}`;
+      window.open(url, '_blank');
+    });
+
+    lineLink.addEventListener('click', e => {
+      if (!shareOutput) {
+        e.preventDefault();
+        alert('まずは「こっそり告白」を押して結果を作成してください！');
+        return;
+      }
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(shareOutput);
+      e.currentTarget.href = `https://line.me/R/msg/text/?${text}%0D%0A${url}`;
+    });
+
+    slackLink.addEventListener('click', e => {
+      if (!shareOutput) {
+        e.preventDefault();
+        alert('まずは「こっそり告白」を押して結果を作成してください！');
+        return;
+      }
+      const url = encodeURIComponent(window.location.href);
+      e.currentTarget.href = `https://slack.com/share?text=${encodeURIComponent(shareOutput)}&url=${url}`;
+    });
+
+    discordLink.addEventListener('click', e => {
+      if (!shareOutput) {
+        e.preventDefault();
+        alert('まずは「こっそり告白」を押して結果を作成してください！');
+        return;
+      }
+      const url = encodeURIComponent(window.location.href);
+      e.currentTarget.href = `https://discord.com/channels/@me`;
+    });
+
+    copyBtn.addEventListener('click', () => {
+      if (!shareOutput) {
+        alert('まずは「こっそり告白」を押して結果を作成してください！');
+        return;
+      }
+      navigator.clipboard.writeText(shareOutput).then(() => {
+        alert('結果をコピーしました！');
+      }, () => {
+        alert('コピーに失敗しました。手動でコピーしてください。');
+      });
+    });
+  </script>
 
 </body>
 </html>
