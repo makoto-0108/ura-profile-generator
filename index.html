@@ -85,7 +85,7 @@
       width: 49%;
       font-size: 1rem;
       font-weight: bold;
-      background-color: black; /* 共有ボタンは黒 */
+      background-color: black;
       color: white;
       margin-top: 20px;
       padding: 12px;
@@ -107,13 +107,13 @@
     }
     pre {
       margin-top: 10px;
-      background: #fdf8ec; /* アイボリー系で全体になじむ */
+      background: #fdf8ec;
       padding: 15px;
       white-space: pre-wrap;
       border-radius: 8px;
       font-size: 1rem;
       min-height: 140px;
-      color: #333; /* 濃すぎず読みやすいダークグレー */
+      color: #333;
       font-weight: normal;
       box-shadow: 0 2px 6px rgba(0,0,0,0.06);
       transition: all 0.3s ease;
@@ -272,4 +272,57 @@
       const q1 = document.getElementById('q1').value.trim();
       const q2 = document.getElementById('q2').value.trim();
       const q3 = document.getElementById('q3').value.trim();
-      const q4 = document.getElementById('q4').value.t
+      const q4 = document.getElementById('q4').value.trim();
+      const q5 = document.getElementById('q5').value.trim();
+
+      if (!q1 || !q2 || !q3 || !q4 || !q5) {
+        resultBox.textContent = '全ての質問に答えてくださいね！';
+        return;
+      }
+
+      fullOutput = makeProfile(q1, q2, q3, q4, q5);
+      resultBox.textContent = fullOutput;
+      shareOutput = encodeURIComponent(fullOutput);
+
+      // 共有リンクの更新
+      lineLink.href = `https://line.me/R/msg/text/?${shareOutput}`;
+      // SlackやDiscordは公式なシェアURLがないためプレースホルダー的にテキストだけ
+      slackLink.href = `https://slack.com/share?text=${shareOutput}`;
+      discordLink.href = `https://discord.com/share?text=${shareOutput}`;
+
+      // 共有メニューは閉じておく
+      shareMenu.style.display = 'none';
+    });
+
+    shareBtn.addEventListener('click', () => {
+      if (shareMenu.style.display === 'block') {
+        shareMenu.style.display = 'none';
+      } else {
+        shareMenu.style.display = 'block';
+      }
+    });
+
+    twitterShareBtn.addEventListener('click', () => {
+      if (!fullOutput) {
+        alert('まずは「こっそり告白」ボタンを押して結果を作成してください！');
+        return;
+      }
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${shareOutput}`;
+      window.open(twitterUrl, '_blank');
+    });
+
+    copyBtn.addEventListener('click', () => {
+      if (!fullOutput) {
+        alert('コピーする内容がありません！');
+        return;
+      }
+      navigator.clipboard.writeText(fullOutput).then(() => {
+        alert('結果テキストをコピーしました！');
+      }).catch(() => {
+        alert('コピーに失敗しました。手動でコピーしてください。');
+      });
+    });
+  </script>
+
+</body>
+</html>
