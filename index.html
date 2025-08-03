@@ -15,7 +15,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
     .header-container {
-      background-color: #1da1f2;
+      background-color: #00bfa5;
       padding: 12px 20px;
       border-radius: 6px;
       margin-bottom: 20px;
@@ -51,7 +51,7 @@
       font-size: 1rem;
       box-sizing: border-box;
     }
-    button, #shareBtn, #twitterShareBtn {
+    button, #twitterShareBtn {
       margin-top: 20px;
       padding: 12px;
       font-size: 1.1rem;
@@ -63,25 +63,40 @@
       user-select: none;
       transition: background-color 0.3s ease;
     }
-    button:hover, #shareBtn:hover, #twitterShareBtn:hover {
+    button:hover, #twitterShareBtn:hover {
       background-color: #333;
     }
     #quizForm button[type="submit"] {
-      background-color: #1da1f2;
+      background-color: #00bfa5;
       width: 100%;
       font-weight: bold;
       user-select: none;
     }
     #quizForm button[type="submit"]:hover {
-      background-color: #0d8ddb;
+      background-color: #009e87;
     }
-    #twitterShareBtn, #shareBtn {
+    #twitterShareBtn {
       width: 49%;
       font-size: 1rem;
       font-weight: bold;
+      background-color: black;
     }
-    #twitterShareBtn {
-      margin-right: 2%;
+    #shareBtn {
+      width: 49%;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: black; /* 共有ボタンは黒 */
+      color: white;
+      margin-top: 20px;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    #shareBtn:hover {
+      background-color: #333;
     }
     #resultTitle {
       margin-top: 30px;
@@ -92,15 +107,15 @@
     }
     pre {
       margin-top: 10px;
-      background: #81c784;
+      background: #fdf8ec; /* アイボリー系で全体になじむ */
       padding: 15px;
       white-space: pre-wrap;
       border-radius: 8px;
       font-size: 1rem;
       min-height: 140px;
-      color: #1b1b1b;
-      font-weight: bold;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      color: #333; /* 濃すぎず読みやすいダークグレー */
+      font-weight: normal;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
       transition: all 0.3s ease;
       user-select: text;
     }
@@ -257,77 +272,4 @@
       const q1 = document.getElementById('q1').value.trim();
       const q2 = document.getElementById('q2').value.trim();
       const q3 = document.getElementById('q3').value.trim();
-      const q4 = document.getElementById('q4').value.trim();
-      const q5 = document.getElementById('q5').value.trim();
-
-      if (!q1 || !q2 || !q3 || !q4 || !q5) {
-        alert('すべての質問に答えてください！');
-        return;
-      }
-
-      fullOutput = makeProfile(q1, q2, q3, q4, q5);
-      shareOutput = fullOutput;
-      resultBox.textContent = fullOutput;
-      shareMenu.style.display = 'none';
-    });
-
-    shareBtn.addEventListener('click', () => {
-      shareMenu.style.display = (shareMenu.style.display === 'none' || shareMenu.style.display === '') ? 'block' : 'none';
-    });
-
-    twitterShareBtn.addEventListener('click', () => {
-      if (!shareOutput) {
-        alert('まずは「こっそり告白」を押して結果を作成してください！');
-        return;
-      }
-      const text = encodeURIComponent(shareOutput);
-      const url = `https://twitter.com/intent/tweet?text=${text}`;
-      window.open(url, '_blank');
-    });
-
-    lineLink.addEventListener('click', e => {
-      if (!shareOutput) {
-        e.preventDefault();
-        alert('まずは「こっそり告白」を押して結果を作成してください！');
-        return;
-      }
-      const url = encodeURIComponent(window.location.href);
-      const text = encodeURIComponent(shareOutput);
-      e.currentTarget.href = `https://line.me/R/msg/text/?${text}%0D%0A${url}`;
-    });
-
-    slackLink.addEventListener('click', e => {
-      if (!shareOutput) {
-        e.preventDefault();
-        alert('まずは「こっそり告白」を押して結果を作成してください！');
-        return;
-      }
-      const url = encodeURIComponent(window.location.href);
-      e.currentTarget.href = `https://slack.com/share?text=${encodeURIComponent(shareOutput)}&url=${url}`;
-    });
-
-    discordLink.addEventListener('click', e => {
-      if (!shareOutput) {
-        e.preventDefault();
-        alert('まずは「こっそり告白」を押して結果を作成してください！');
-        return;
-      }
-      const url = encodeURIComponent(window.location.href);
-      e.currentTarget.href = `https://discord.com/channels/@me`;
-    });
-
-    copyBtn.addEventListener('click', () => {
-      if (!shareOutput) {
-        alert('まずは「こっそり告白」を押して結果を作成してください！');
-        return;
-      }
-      navigator.clipboard.writeText(shareOutput).then(() => {
-        alert('結果をコピーしました！');
-      }, () => {
-        alert('コピーに失敗しました。手動でコピーしてください。');
-      });
-    });
-  </script>
-
-</body>
-</html>
+      const q4 = document.getElementById('q4').value.t
